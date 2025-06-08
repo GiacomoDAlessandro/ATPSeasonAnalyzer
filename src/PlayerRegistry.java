@@ -1,10 +1,20 @@
 import java.util.HashMap;
 
+/**
+ *
+ */
 public class PlayerRegistry {
 
+  /**
+   *
+   */
   private HashMap<String, playerStats> stats = new HashMap<>();
 
-
+  /**
+   *
+   * @param match
+   * @return
+   */
   public HashMap<String, playerStats> recordMatch(Match match) {
     boolean hasWinner = stats.containsKey(match.getWinnerName());
     boolean hasLoser = stats.containsKey(match.getLoserName());

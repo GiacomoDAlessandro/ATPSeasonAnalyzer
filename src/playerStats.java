@@ -113,4 +113,20 @@ public class playerStats implements Comparable<playerStats> {
         && toCompare.numWins == this.numWins && toCompare.numLosses == this.numLosses
         && toCompare.roundsReached.equals(this.roundsReached);
   }
+
+  public int getWins() {
+    return this.numWins;
+  }
+
+  public int getLosses() {return this.numLosses;}
+
+  public int getAge() {return this.playerAge;}
+
+  public double getWinPercentage() {return this.winPercentage;}
+
+  public int getAces() {return this.numAces;}
+
+  public int getHighestRankingPts() {return this.numRankingPts;}
+
+
 }

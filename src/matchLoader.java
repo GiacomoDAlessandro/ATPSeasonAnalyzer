@@ -43,6 +43,7 @@ public class matchLoader extends PlayerRegistry {
   }
 
   public HashMap<String, playerStats> registerPlayers(ArrayList<Match> matches) {
+    this.registeredPlayers = new HashMap<>();
     for (Match player: matches) {
       this.registeredPlayers = recordMatch(player);
     }
