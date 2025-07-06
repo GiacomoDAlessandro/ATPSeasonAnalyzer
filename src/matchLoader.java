@@ -5,16 +5,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
+/**
+ * Reads files and reads the lines, turning them into match objects and eventually creating
+ * playerStats objects with those matches
+ */
 public class matchLoader extends PlayerRegistry {
 
-  private String[][] newData;
-
+  /**
+   * Hashmap of all players that played an ATP match in a single year
+   */
   private HashMap<String, playerStats> registeredPlayers;
 
-  public String[][] getMatches() {return this.newData;}
-
-
+  /**
+   * Reads a file given, splits up the lines into different arrays and returns the file as an
+   * ArrayList of type match
+   *
+   * @param file file given to read
+   * @return arrayList of type match that has all matches in a given year
+   * @throws FileNotFoundException when file given is not found
+   */
   public ArrayList<Match> readYearMatches(FileReader file) throws FileNotFoundException {
 
     //Make reader to read file that is called to be read
@@ -25,6 +34,9 @@ public class matchLoader extends PlayerRegistry {
 
     try {
       String line;
+      //Skips header line
+      reader.readLine();
+      //Adds line to matchLines arrayList as long as there is a line left, done when file is empty
       while ((line = reader.readLine()) != null) {
         matchLines.add(line);
       }
@@ -42,8 +54,16 @@ public class matchLoader extends PlayerRegistry {
     return matches;
   }
 
+  /**
+   * Registers all matches and calls the recordMatch class with each match
+   *
+   * @param matches arrayList of type Match with all matches from a given year to register
+   * @return HashMap with string as a key and playerStats as the value, of all players that
+   * played in the ATP tour in a given year
+   */
   public HashMap<String, playerStats> registerPlayers(ArrayList<Match> matches) {
     this.registeredPlayers = new HashMap<>();
+    //Iterates through all matches in the matches arrayList and calls recordMatch with each Match
     for (Match player: matches) {
       this.registeredPlayers = recordMatch(player);
     }
@@ -52,6 +72,14 @@ public class matchLoader extends PlayerRegistry {
   }
 
 
+  /**
+   * Reads a file from the name given and calls registerPlayers which eventually gets all
+   * statistics of each player that played on the ATP tour in a given year
+   *
+   * @param fileName name of file to be read
+   * @return HashMap with key of String and value of playerStats that has all players' statistics
+   * @throws FileNotFoundException thrown when file is not found
+   */
   public HashMap<String, playerStats> readFile(String fileName) throws FileNotFoundException{
     try {
       FileReader file = new FileReader(fileName);

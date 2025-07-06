@@ -1,4 +1,7 @@
-
+/**
+ * Represents the different stages of a tournament, different rounds in a tournament
+ * Each round uses a shorthand to describe it, ex. ("F" - Final, "SF" - SemiFinal, etc.)
+ */
 public enum Round {
 
   FINAL("F"),
@@ -11,22 +14,32 @@ public enum Round {
   ROUND_ROBIN("RR"),
   BRONZE("BR");
 
+  /**
+   * Gets the string given to decipher what round the match was played in
+   *
+   * @param code string describing what round the match was played in
+   */
   Round(String code) {
-    this.code = code;
+    this.roundPlayed = code;
   }
 
-  private final String code;
+  /**
+   * String describing what round was played
+   */
+  private final String roundPlayed;
 
+  /**
+   * From the code given to describe the round played, the correct round is assigned
+   *
+   * @param round String describing round played
+   * @return round played
+   */
   public static Round fromCode(String round) {
     for (Round newround: values()) {
-      if (newround.code.equals(round)) {
+      if (newround.roundPlayed.equals(round)) {
         return newround;
       }
     }
     throw new IllegalArgumentException("Round: " + round + " not found");
-  }
-
-  public String getCode() {
-    return code;
   }
 }
